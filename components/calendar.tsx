@@ -12,7 +12,7 @@ interface CalendarProps {
 }
 
 export function Calendar() {
-  const { currentDate, setCurrentDate, events, addEvent, todos, toggleTodo, deleteTodo } = useCalendar()
+  const { currentDate, setCurrentDate, events, todos, toggleTodo, deleteTodo } = useCalendar()
  
   const startOfWeek = new Date(currentDate)
   startOfWeek.setDate(currentDate.getDate() - currentDate.getDay())
@@ -66,9 +66,9 @@ export function Calendar() {
       <div className="grid grid-cols-[auto_1fr_1fr_1fr_1fr_1fr_1fr_1fr] gap-4">
         <div className="w-16" />
         {days.map((day, i) => (
-          <div key={i} className="text-center">
-            <div className="text-sm font-medium">{dayNames[day.getDay()]}</div>
-            <div className="text-2xl font-semibold">{day.getDate()}</div>
+          <div key={i} className={"text-center relative p-3"+ (day.getDay() === currentDate.getDay() ? " bg-gray-200 dark:bg-neutral-800 rounded-full " : "")}>
+            <div className="text-sm font-medium  ">{dayNames[day.getDay()]}</div>
+            <div className="text-2xl font-semibold " >{day.getDate()}</div>
           </div>
         ))}
         {hours.map((hour) => (
@@ -77,7 +77,7 @@ export function Calendar() {
               {hour === 0 ? "12 AM" : hour === 12 ? "12 PM" : hour > 12 ? `${hour - 12} PM` : `${hour} AM`}
             </div>
             {days.map((day, dayIndex) => (
-              <div key={`${day}-${hour}`} className="border-t relative h-16">
+              <div key={`${day}-${hour}`} className={"border-t relative h-16"}>
                 {events
                   .filter(
                     (event) =>
