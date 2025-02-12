@@ -1,4 +1,4 @@
-# Calendar App
+# Task Manager
 
 ## Overview
 The Task-Manager app is a personal project designed to help users manage their schedules efficiently. It allows users to create, edit, and delete events, set reminders, and view their calendar in different formats.
