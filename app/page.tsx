@@ -4,6 +4,11 @@ import { useState, useEffect } from "react"
 import { Calendar } from "@/components/calendar"
 import { Sidebar } from "@/components/sidebar"
 import { CalendarProvider } from "@/lib/CalendarContext"
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable"
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false)
@@ -19,12 +24,20 @@ export default function Page() {
   return (
     <CalendarProvider>
       <div className="flex h-screen bg-background">
-        <Sidebar />
-        <main className="flex-1 overflow-auto">
-          <Calendar/>
-        </main>
+        <ResizablePanelGroup direction="horizontal"  className="h-screen">
+          <ResizablePanel className="h-screen "  defaultSize={30}>
+            <div className="h-full overflow-y-auto w">
+              <Sidebar />
+            </div>
+          </ResizablePanel>
+          <ResizableHandle />
+          <ResizablePanel className="h-screen flex-1">
+            <div className="h-full overflow-y-auto">
+              <Calendar />
+            </div>
+          </ResizablePanel>
+        </ResizablePanelGroup>
       </div>
     </CalendarProvider>
   )
 }
-

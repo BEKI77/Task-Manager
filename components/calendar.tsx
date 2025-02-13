@@ -78,27 +78,6 @@ export function Calendar() {
             </div>
             {days.map((day, dayIndex) => (
               <div key={`${day}-${hour}`} className={"border-t relative h-16"}>
-                {events
-                  .filter(
-                    (event) =>
-                      event.start.getDate() === day.getDate() &&
-                      event.start.getMonth() === day.getMonth() &&
-                      event.start.getFullYear() === day.getFullYear() &&
-                      event.start.getHours() === hour,
-                  )
-                  .map((event) => (
-                    <div
-                      key={event.id}
-                      className={`absolute inset-x-2 top-2 bottom-2 ${
-                        event.color === "purple" ? "bg-purple-100" : "bg-green-100"
-                      } rounded-lg p-2`}
-                    >
-                      <div className="text-sm font-medium">{event.title}</div>
-                      <div className="text-xs text-muted-foreground">
-                        {event.start.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                      </div>
-                    </div>
-                  ))}
                 {todos
                   .filter(
                     (todo) =>
@@ -110,25 +89,26 @@ export function Calendar() {
                   .map((todo) => (
                     <div
                       key={todo.id}
-                      className={`absolute inset-x-2 top-2 bottom-2 ${
+                      className={`absolute inset-x-2 top-2 bottom-2  ${
                         todo.completed ? "bg-green-100" : "bg-yellow-100"
-                      } rounded-lg p-2 flex items-center justify-between`}
+                      } rounded-2xl p-2 flex items-center justify-between`}
                     >
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 text-black">
                         <Checkbox
                           id={`calendar-${todo.id}`}
                           checked={todo.completed}
                           onCheckedChange={() => toggleTodo(todo.id)}
+                          className="border border-black bg-slate-100"
                         />
                         <label
                           htmlFor={`calendar-${todo.id}`}
-                          className={`text-sm font-medium ${todo.completed ? "line-through" : ""}`}
+                          className={`text-sm font-medium  ${todo.completed ? "line-through" : ""}`}
                         >
                           {todo.label}
                         </label>
                       </div>
                       <Button variant="ghost" size="sm" onClick={() => deleteTodo(todo.id)}>
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-4 w-4 text-black" />
                       </Button>
                     </div>
                   ))}

@@ -1,11 +1,11 @@
 "use client"
 
-import { Plus, MoreHorizontal, Trash2 } from "lucide-react"
+import { Plus, MoreHorizontal} from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { useCalendar } from "@/lib/CalendarContext"
 import { useState } from "react"
+import TodoItem from "./todoitems"
 
 export function Sidebar() {
   const { todos, addTodo, toggleTodo, deleteTodo, currentDate } = useCalendar()
@@ -24,7 +24,7 @@ export function Sidebar() {
   }
 
   return (
-    <div className="w-80 border-r bg-card flex flex-col">
+    <div className="w-auto border-r bg-card flex flex-col h-full">
       <div className="p-4 flex items-center justify-between border-b">
         <h1 className="text-2xl font-bold">Todos</h1>
         <Button variant="ghost" size="icon">
@@ -78,28 +78,4 @@ export function Sidebar() {
   )
 }
 
-function TodoItem({
-  todo,
-  onToggle,
-  onDelete,
-}: {
-  todo: { id: string; label: string; completed: boolean; date: Date }
-  onToggle: () => void
-  onDelete: () => void
-}) {
-  return (
-    <div className="flex items-center space-x-2 bg-background p-3 rounded-lg shadow-sm">
-      <Checkbox id={todo.id} checked={todo.completed} onCheckedChange={onToggle} />
-      <label
-        htmlFor={todo.id}
-        className={`text-sm flex-grow ${todo.completed ? "line-through text-muted-foreground" : ""}`}
-      >
-        {todo.label} - {todo.date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-      </label>
-      <Button variant="ghost" size="sm" onClick={onDelete}>
-        <Trash2 className="h-4 w-4" />
-      </Button>
-    </div>
-  )
-}
 
