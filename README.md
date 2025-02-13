@@ -18,7 +18,7 @@ To install and run the Calendar App locally, follow these steps:
 
 2. **Install dependencies**:
     ```bash
-    npm install
+    npm install --legacy-peer-deps
     ```
 
 3. **Run the application**:
