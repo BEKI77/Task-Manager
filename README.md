@@ -23,7 +23,7 @@ To install and run the Calendar App locally, follow these steps:
 
 3. **Run the application**:
     ```bash
-    npm start
+    npm run dev
     ```
 
 ## Usage
