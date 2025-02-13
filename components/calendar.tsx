@@ -3,16 +3,12 @@
 import { ChevronLeft, ChevronRight, Trash2, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import React, { useState } from "react"
-import { useCalendar, type Event } from "@/lib/CalendarContext"
+import { useCalendar } from "@/lib/CalendarContext"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ModeToggle } from "./theme-toggle"
 
-interface CalendarProps {
-  onShareClick: () => void
-}
-
 export function Calendar() {
-  const { currentDate, setCurrentDate, events, todos, toggleTodo, deleteTodo } = useCalendar()
+  const { currentDate, setCurrentDate, todos, toggleTodo, deleteTodo } = useCalendar()
  
   const startOfWeek = new Date(currentDate)
   startOfWeek.setDate(currentDate.getDate() - currentDate.getDay())
@@ -39,7 +35,7 @@ export function Calendar() {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 ">
       <header className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
           <h2 className="text-xl font-semibold">
@@ -90,10 +86,10 @@ export function Calendar() {
                     <div
                       key={todo.id}
                       className={`absolute inset-x-2 top-2 bottom-2  ${
-                        todo.completed ? "bg-green-100" : "bg-yellow-100"
-                      } rounded-2xl p-2 flex items-center justify-between`}
+                        todo.completed ? "bg-green-100 " : "bg-yellow-200 dark:bg-zinc-900"
+                      } rounded-2xl p-2 flex items-center justify-between h-full opacity-[0.9]`}
                     >
-                      <div className="flex items-center space-x-2 text-black">
+                      <div className="flex items-center space-x-2 text-black dark:text-white">
                         <Checkbox
                           id={`calendar-${todo.id}`}
                           checked={todo.completed}
@@ -102,13 +98,13 @@ export function Calendar() {
                         />
                         <label
                           htmlFor={`calendar-${todo.id}`}
-                          className={`text-sm font-medium  ${todo.completed ? "line-through" : ""}`}
+                          className={`text-sm font-medium  ${todo.completed ? "line-through text-black" : ""}`}
                         >
                           {todo.label}
                         </label>
                       </div>
                       <Button variant="ghost" size="sm" onClick={() => deleteTodo(todo.id)}>
-                        <Trash2 className="h-4 w-4 text-black" />
+                        <Trash2 className={`h-4 w-4 ${todo.completed ? "text-black":""}`} />
                       </Button>
                     </div>
                   ))}

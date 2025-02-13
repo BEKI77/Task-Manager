@@ -24,7 +24,7 @@ export function Sidebar() {
   }
 
   return (
-    <div className="w-auto border-r bg-card flex flex-col h-full">
+    <div className="w-auto border-r bg-card flex flex-col h-full dark:bg-stone-950">
       <div className="p-4 flex items-center justify-between border-b">
         <h1 className="text-2xl font-bold">Todos</h1>
         <Button variant="ghost" size="icon">
