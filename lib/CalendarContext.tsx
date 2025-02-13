@@ -6,6 +6,7 @@ import { createContext, useContext, useState, useCallback, useEffect } from "rea
 export interface Todo {
   id: string
   label: string
+  description?: string
   completed: boolean
   date: Date
 }
@@ -14,7 +15,7 @@ interface CalendarContextType {
   currentDate: Date
   setCurrentDate: (date: Date) => void
   todos: Todo[]
-  addTodo: (label: string, date: Date) => void
+  addTodo: (label: string, date: Date, description?: string) => void
   toggleTodo: (id: string) => void
   deleteTodo: (id: string) => void
 }
@@ -47,8 +48,8 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
 
 
-  const addTodo = useCallback((label: string, date: Date) => {
-    setTodos((prev) => [...prev, { id: Date.now().toString(), label, completed: false, date }])
+  const addTodo = useCallback((label: string, date: Date, description?:string) => {
+    setTodos((prev) => [...prev, { id: Date.now().toString(), label, description ,completed: false, date }])
   }, [])
 
   const toggleTodo = useCallback((id: string) => {

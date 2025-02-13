@@ -6,25 +6,27 @@ import { Input } from "@/components/ui/input"
 import { useCalendar } from "@/lib/CalendarContext"
 import { useState } from "react"
 import TodoItem from "./todoitems"
+import { Textarea } from "./ui/textarea"
 
 export function Sidebar() {
   const { todos, addTodo, toggleTodo, deleteTodo, currentDate } = useCalendar()
   const [newTodo, setNewTodo] = useState("")
   const [newTodoTime, setNewTodoTime] = useState("12:00")
+  const [newTodoDescription, setNewTodoDescription] = useState("")
 
   const handleAddTodo = () => {
     if (newTodo.trim()) {
       const [hours, minutes] = newTodoTime.split(":").map(Number)
       const todoDate = new Date(currentDate)
       todoDate.setHours(hours, minutes, 0, 0)
-      addTodo(newTodo.trim(), todoDate)
+      addTodo(newTodo.trim(), todoDate, newTodoDescription)
       setNewTodo("")
       setNewTodoTime("12:00")
     }
   }
 
   return (
-    <div className="w-auto border-r bg-card flex flex-col h-full dark:bg-stone-950">
+    <div className="w-auto bg-card flex flex-col h-full dark:bg-stone-950">
       <div className="p-4 flex items-center justify-between border-b">
         <h1 className="text-2xl font-bold">Todos</h1>
         <Button variant="ghost" size="icon">
@@ -58,6 +60,12 @@ export function Sidebar() {
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
             placeholder="Add new todo"
+            className="flex-grow"
+          />
+           <Textarea
+            value={newTodoDescription}
+            onChange={(e) => setNewTodoDescription(e.target.value)}
+            placeholder="Description (optional)"
             className="flex-grow"
           />
           <div className="flex space-x-2">
