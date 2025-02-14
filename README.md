@@ -8,7 +8,7 @@ The Task-Manager app is a personal project designed to help users manage their s
 - **Multiple Views**: View the calendar in daily, weekly, and monthly formats.
 
 ## Installation
-To install and run the Calendar App locally, follow these steps:
+To install and run the App locally, follow these steps:
 
 1. **Clone the repository**:
     ```bash
@@ -30,6 +30,10 @@ To install and run the Calendar App locally, follow these steps:
 1. Open your browser and navigate to `http://localhost:3000`.
 2. Register for a new account or log in with your existing credentials.
 3. Start managing your calendar by adding new events, setting reminders, and switching between different views.
+
+## Or use the demo hosted version using the below link
+
+https://task-manager-pi-rosy.vercel.app/
 
 ## Contributing
 Contributions are welcome! Please follow these steps to contribute:

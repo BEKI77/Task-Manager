@@ -25,7 +25,7 @@ export default function Page() {
     <CalendarProvider>
       <div className="flex h-screen bg-background">
         <ResizablePanelGroup direction="horizontal"  className="h-screen">
-          <ResizablePanel className="h-screen "  defaultSize={30}>
+          <ResizablePanel className="h-screen hidden md:block "  defaultSize={30}>
             <div className="h-full overflow-y-auto w">
               <Sidebar />
             </div>

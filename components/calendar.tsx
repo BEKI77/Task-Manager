@@ -7,6 +7,7 @@ import { useCalendar } from "@/lib/CalendarContext"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ModeToggle } from "./theme-toggle"
 import TodoDis from "./todo"
+import InPutSection from "./inputSection"
 
 export function Calendar() {
   const { currentDate, setCurrentDate, todos, toggleTodo, deleteTodo } = useCalendar()
@@ -96,6 +97,9 @@ export function Calendar() {
             ))}
           </React.Fragment>
         ))}
+      </div>
+      <div className="md:hidden">
+        <InPutSection/>
       </div>
     </div>
   )
