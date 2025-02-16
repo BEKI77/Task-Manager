@@ -1,16 +1,15 @@
 "use client"
 
-import { ChevronLeft, ChevronRight, Trash2 } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import React, { useState } from "react"
+import React from "react"
 import { useCalendar } from "@/lib/CalendarContext"
-import { Checkbox } from "@/components/ui/checkbox"
 import { ModeToggle } from "./theme-toggle"
 import TodoDis from "./todo"
 import InPutSection from "./inputSection"
 
 export function Calendar() {
-  const { currentDate, setCurrentDate, todos, toggleTodo, deleteTodo } = useCalendar()
+  const { currentDate, setCurrentDate, todos,  } = useCalendar()
  
   const startOfWeek = new Date(currentDate)
   startOfWeek.setDate(currentDate.getDate() - currentDate.getDay())
@@ -53,9 +52,6 @@ export function Calendar() {
           </Button>
           <Button variant="ghost" size="icon" onClick={handleNextWeek}>
             <ChevronRight className="h-4 w-4" />
-          </Button>
-          <Button variant="secondary" className="ml-2" onClick={() => setCurrentDate(new Date())}>
-            Today
           </Button>
           <ModeToggle/>
         </div>

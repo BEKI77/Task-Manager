@@ -3,6 +3,7 @@
 import type React from "react"
 import { createContext, useContext, useState, useCallback, useEffect } from "react"
 
+
 export interface Todo {
   id: string
   label: string
@@ -11,10 +12,12 @@ export interface Todo {
   date: Date
 }
 
+
 interface CalendarContextType {
   currentDate: Date
   setCurrentDate: (date: Date) => void
   todos: Todo[]
+  hourlyTodos: Todo[][]
   addTodo: (label: string, date: Date, description?: string) => void
   toggleTodo: (id: string) => void
   deleteTodo: (id: string) => void
@@ -40,6 +43,7 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }) : []
   })
   
+  const [hourlyTodos, setHourlyTodos] = useState<Todo[][]>(Array.from({ length: 24 }, () => []))
 
   // Save todos to localStorage whenever they change
   useEffect(() => {
@@ -49,15 +53,24 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
 
   const addTodo = useCallback((label: string, date: Date, description?:string) => {
-    setTodos((prev) => [...prev, { id: Date.now().toString(), label, description ,completed: false, date }])
+    const newTodo = { id: Date.now().toString(), label, description, completed: false, date }
+    setTodos((prev) => [...prev, newTodo])
+    setHourlyTodos((prev) =>{
+      const hour = date.getHours()
+      const newHourlyTodos = [...prev]
+      newHourlyTodos[hour] = [... newHourlyTodos[hour], newTodo]
+      return newHourlyTodos
+    })
   }, [])
 
   const toggleTodo = useCallback((id: string) => {
     setTodos((prev) => prev.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)))
+    setHourlyTodos((prev) => prev.map((hourTodos)=> hourTodos.map((todo)=>(todo.id ===id ? {...todo, completed: !todo.completed}:todo ))))
   }, [])
 
   const deleteTodo = useCallback((id: string) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id))
+    setHourlyTodos((prev)=> prev.map((hourTodos)=> hourTodos.filter((todo)=>todo.id!==id)))
   }, [])
 
 
@@ -68,6 +81,7 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         currentDate,
         setCurrentDate,
         todos,
+        hourlyTodos,
         addTodo,
         toggleTodo,
         deleteTodo,
