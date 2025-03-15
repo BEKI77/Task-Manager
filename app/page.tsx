@@ -1,6 +1,7 @@
-"use client"
-
-import { useState, useEffect } from "react"
+// "use client"
+import { redirect } from "next/navigation";
+import { createClient } from "@/utils/supabase/server";
+// import { useState, useEffect } from "react"
 import { Calendar } from "@/components/calendar"
 import { Sidebar } from "@/components/sidebar"
 import { CalendarProvider } from "@/lib/CalendarContext"
@@ -10,16 +11,24 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
 
-export default function Page() {
-  const [isClient, setIsClient] = useState(false)
+export default async function Page() {
+  const supabase = createClient();
 
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+  const { data, error } = await supabase.auth.getUser();
 
-  if (!isClient) {
-    return null // or a loading spinner
+  if (error || !data?.user) {
+    redirect("/signin");
   }
+
+  // const [isClient, setIsClient] = useState(false)
+
+  // useEffect(() => {
+  //   setIsClient(true)
+  // }, [])
+
+  // if (!isClient) {
+  //   return null // or a loading spinner
+  // }
 
   return (
     <CalendarProvider>

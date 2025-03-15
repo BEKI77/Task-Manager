@@ -1,9 +1,6 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
-import dotenv from "dotenv";
 
-
-dotenv.config({ path: '/home/bek/PersonalP-j/calendar-app/.env.local' });
 
 if(process.env.PROJECT_URL==null|| process.env.API_KEY==null){
     console.error("Environment variables aren't loading correctly");

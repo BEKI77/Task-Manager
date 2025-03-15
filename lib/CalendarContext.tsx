@@ -1,5 +1,3 @@
-"use client"
-
 import type React from "react"
 import { createContext, useContext, useState, useCallback, useEffect } from "react"
 
@@ -10,6 +8,7 @@ export interface Todo {
   description?: string
   completed: boolean
   date: Date
+  user_id?: string
 }
 
 
